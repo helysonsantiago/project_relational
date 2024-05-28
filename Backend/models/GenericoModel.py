@@ -29,29 +29,3 @@ class UsuarioBase(Base):
     )
     
     
-
-    
-class Dentista(UsuarioBase):
-    __tablename__ = "DENTISTA"
-
-    role : Mapped[str] = mapped_column(String, default='DENTISTA')
-     
-    _mapper_args_ = {
-        'polymorphic_identity':'DENTISTA',
-        'concrete': True
-   }
-  
-
-class Recepcionista(UsuarioBase):
-    __tablename__ = "RECEPCIONISTA"
-
-    role : Mapped[str] = mapped_column(String, default='RECEPCIONISTA')
-   
-    _mapper_args_ = {
-        'polymorphic_identity':'RECEPCIONISTA',
-        'concrete': True
-   }
-    
-
-def create_all(engine):
-    Base.metadata.create_all(bind=engine)

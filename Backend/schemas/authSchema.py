@@ -1,8 +1,20 @@
-from pydantic import BaseModel, validator
 from typing import Optional
+from pydantic import BaseModel, validator
 
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
+class TokenData(BaseModel):
+    email: Optional[str] = None
+
+class User(BaseModel):
+    email: str
+
+    class Config:
+        orm_mode = True
+                
 
 class UserUpdate(BaseModel):
 
@@ -29,33 +41,3 @@ class UserCreate(BaseModel):
         if not any(char.islower() for char in v):
             raise ValueError('A senha deve conter pelo menos uma letra minúscula')
         return v
-
-
-class recepcionistaBase(BaseModel):
-    nome: str
-    email: str
-    senha: int
-    
-
-class dentistaBase(recepcionistaBase):
-    cro : str
-
-
-
-class dentistaRequest(dentistaBase):
-    ...
-
-class recepcionistaRequest(recepcionistaBase):
-    ...
-
-class dentistaResponse(dentistaBase):
-    id: int
-
-    class Config:
-        orm_mode = True
-
-class recepcionistaResponse(recepcionistaBase):
-    id: int
-
-    class Config:
-        orm_mode = True
