@@ -13,7 +13,8 @@ router = APIRouter(
 )
 
 @router.post("/", response_model=dentistaResponse, status_code=status.HTTP_201_CREATED)
-def create(request: dentistaRequest, db: Session = Depends(get_db), current_user: str = Depends(get_current_user_in_roles([UserRole.ADMIN.value]))):
+def create(request: dentistaRequest, db: Session = Depends(get_db), current_user: str = Depends(
+    get_current_user_in_roles([UserRole.ADMIN.value]))):
     dentista = dentistaRepository.save(db, Dentista(**request.dict()))
     return dentistaResponse.from_orm(dentista)
 
