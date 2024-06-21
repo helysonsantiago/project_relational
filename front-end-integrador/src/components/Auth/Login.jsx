@@ -1,30 +1,36 @@
-import{ useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState } from 'react'; // Hook para gerenciar estado
+import { useNavigate } from 'react-router-dom'; // Hook para navegação
+import { toast } from 'react-toastify'; // Biblioteca para notificações
+import 'react-toastify/dist/ReactToastify.css'; // Estilos para as notificações
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones para mostrar/ocultar senha
 
 const Login = () => {
+  // Estados para armazenar email, senha, visibilidade da senha e opção "Lembrar de mim"
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
+  // Hook para navegação
   const navigate = useNavigate();
 
+  // Função para lidar com o login
   const handleLogin = (e) => {
     e.preventDefault();
     if (email === 'user@example.com' && password === 'kauan') {
-      toast.success('Login bem-sucedido!');
-      navigate('/home');
+      toast.success('Login bem-sucedido!'); // Notificação de sucesso
+      navigate('/home'); // Navega para a página inicial
     } else {
-      toast.error('Email ou senha inválidos');
+      toast.error('Email ou senha inválidos'); // Notificação de erro
     }
   };
 
+  // Função para lidar com esquecimento de senha
   const handleForgotPassword = () => {
-    toast.info('Um link de recuperação de senha foi enviado para seu email.');
+    toast.info('Um link de recuperação de senha foi enviado para seu email.'); // Notificação de informação
   };
 
+  // Função para alternar visibilidade da senha
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
